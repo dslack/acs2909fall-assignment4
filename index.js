@@ -23,4 +23,11 @@ app.ws('/', function(ws, req) {
   })
 });
  
-app.listen(80);
+if (module === require.main) {
+    const server = app.listen(process.env.PORT || 80, () => {
+        const port = server.address().port;
+        console.log(`App listening on port ${port}`);
+    });
+}
+
+module.exports = app;
